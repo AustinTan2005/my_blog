@@ -35,7 +35,7 @@ function IndexPage() {
                 data-bs-smooth-scroll="true"
                 className="scrollspy-example p-5"
                 style={{background: "transparent"}}
-                tabIndex="0"
+                tabIndex={0}
             >
                 <h1 className="mb-4" id="scrollspyHeading1">My Work</h1>
                 <div className="d-flex flex-row align-items-center justify-content-center">
