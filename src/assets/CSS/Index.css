@@ -1,0 +1,30 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #242424;
+  color: rgba(255, 255, 255, 0.87);
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+body{
+  padding-top: 75px;
+}
+
+.hoverCustom1{
+  text-decoration: none;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.hoverCustom1:hover{
+  text-decoration: underline;
+  color: #989595;
+}
+
+.backgroundCustom1{
+  border-radius: 69px 0 0 69px;
+  background: #242424;
+  box-shadow: inset 20px 20px 14px #202020,
+  inset -20px -20px 14px #282828;
+}
