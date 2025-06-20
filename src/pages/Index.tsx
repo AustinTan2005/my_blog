@@ -66,7 +66,7 @@ function IndexPage() {
                     {/*<span>|</span>*/}
                     {/*<a href="#" className="text-decoration-none">Terms & Conditions</a>*/}
                     {/*<span>|</span>*/}
-                    <a href="mailto:jakettm6799@gmail.com" className="text-decoration-none">jakettm6799@gmail.com</a>
+                    <a href="mailto:jakettm6799@gmail.com" className="text-decoration-none">Contact Me</a>
                 </div>
             </footer>
         </>
