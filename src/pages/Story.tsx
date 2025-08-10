@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function StoryPage() {
-    const { bookID } = useParams(); // e.g. "Book1"
+    const { bookID } = useParams();
     console.log(bookID);
     const [chapters, setChapters] = useState<{ chapter: number; title: string; date: string }[]>([]);
 
