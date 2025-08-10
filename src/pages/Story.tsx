@@ -1,30 +1,18 @@
 import NavBar from "../components/NavBar.tsx";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 function StoryPage() {
     const { bookID } = useParams();
     console.log(bookID);
     const [chapters, setChapters] = useState<{ chapter: number; title: string; date: string }[]>([]);
 
-    const ChapterRow = ({
-                            chapter,
-                            title,
-                            date,
-                        }: {
-        chapter: number;
-        title: string;
-        date: string;
-    }) => {
-        const navigate = useNavigate();
+    const ChapterRow = ({ chapter, title, date, url }: { chapter: number; title: string; date: string; url: string }) => {
         return (
             <div
                 className="container-fluid w-100 p-4 d-flex row border-bottom hoverCustom1"
-                onClick={() => {
-                    sessionStorage.setItem("currentBookID", bookID || "");
-                    navigate(`/${bookID}/${chapter}`);
-                }}
+                onClick={() => window.open(url, "_blank")}
+                style={{ cursor: "pointer" }}
             >
                 <div className="col-sm-9">Chapter {chapter} - {title}</div>
                 <div className="col text-end">{date}</div>
@@ -35,10 +23,20 @@ function StoryPage() {
     useEffect(() => {
         const fetchChapters = async () => {
             try {
-                const res = await fetch(`/${bookID}/chapters.json`);
+                const res = await fetch(`/${bookID}.txt`);
                 if (!res.ok) throw new Error("No chapter list");
-                const data = await res.json();
-                setChapters(data);
+                const text = await res.text();
+
+                const parsed = text
+                    .split("\n")
+                    .map(line => line.trim())
+                    .filter(line => line && !line.startsWith("#")) // skip empty or commented lines
+                    .map(line => {
+                        const [chapter, title, date, url] = line.split("|");
+                        return { chapter: Number(chapter), title, date, url };
+                    });
+
+                setChapters(parsed);
             } catch (err) {
                 console.error("Failed to load chapter list:", err);
             }
@@ -46,6 +44,7 @@ function StoryPage() {
 
         if (bookID) fetchChapters();
     }, [bookID]);
+
 
 
     return (
@@ -67,7 +66,7 @@ function StoryPage() {
                                 chapter={chapter}
                                 title={title}
                                 date={date}
-                            />
+                                url={""}                            />
                         ))}
                     </div>
                 </div>
